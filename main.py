@@ -9,13 +9,14 @@ def main(_):
     mnist = input_data.read_data_sets(data_dir, one_hot=True)
 
     # Create the model
-    images = tf.placeholder(tf.float32, [None, 784])
-    weights = tf.Variable(tf.zeros([784, 10]))
-    bias = tf.Variable(tf.zeros([10]))
+    images = tf.placeholder(tf.float32, [None, 784], name="images")
+    weights = tf.Variable(tf.zeros([784, 10]), name="weights")
+    #for each pixel there are 10 different weights for each digit
+    bias = tf.Variable(tf.zeros([10]), name="bias")
     evidence = tf.matmul(images, weights) + bias
 
     # Define loss and optimizer
-    digits = tf.placeholder(tf.float32, [None, 10])
+    digits = tf.placeholder(tf.float32, [None, 10], name="digits")
 
     cross_entropy = tf.reduce_mean(
         tf.nn.softmax_cross_entropy_with_logits_v2(labels=digits, logits=evidence))
