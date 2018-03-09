@@ -2,10 +2,9 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 import tensorflow as tf
 
-data_dir = '/tmp/tensorflow/mnist/input_data'
-
 def main(_):
     # Import data
+    data_dir = '/tmp/tensorflow/mnist/input_data'
     mnist = input_data.read_data_sets(data_dir, one_hot=True)
 
     # Create the model
