@@ -1,28 +1,9 @@
-# Copyright 2015 The TensorFlow Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ==============================================================================
-
-"""A very simple MNIST classifier.
-See extensive documentation at
-http://tensorflow.org/tutorials/mnist/beginners/index.md
-"""
-
 from tensorflow.examples.tutorials.mnist import input_data
 
 import tensorflow as tf
 
 data_dir = '/tmp/tensorflow/mnist/input_data'
+
 def main(_):
     # Import data
     mnist = input_data.read_data_sets(data_dir, one_hot=True)
@@ -44,8 +25,8 @@ def main(_):
     tf.global_variables_initializer().run()
     # Train
     for i in range(1000):
-        batch_xs, batch_ys = mnist.train.next_batch(100)
-        sess.run(train_step, feed_dict={images: batch_xs, digits: batch_ys})
+        batch_images, batch_labels = mnist.train.next_batch(100)
+        sess.run(train_step, feed_dict={images: batch_images, digits: batch_labels})
     # Test trained model
     correct_prediction = tf.equal(tf.argmax(evidence, 1), tf.argmax(digits, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
